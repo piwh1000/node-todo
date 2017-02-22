@@ -1,0 +1,4 @@
+node-todo:
+  build:
+    image: phankinson/node-todo
+    dockerfile_path: Dockerfile
