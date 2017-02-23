@@ -1,4 +1,21 @@
-app:
-  build:
-    image: phankinson/node-todo
-    dockerfile_path: Dockerfile
+awsdeployment:
+  image: codeship/aws-deployment
+  encrypted_env_file: deployment.env.encrypted
+  environment:
+    - AWS_DEFAULT_REGION=us-east-1
+  volumes:
+    - ./:/deploy
+db:
+  image: mongo
+  ports:
+    - "27017:27017"
+web:
+  build: .
+  volumes:
+    - .:/usr/src/app/
+  ports:
+    - "3000:3000"
+  links:
+    - db
+  environment:
+    PORT: 3000

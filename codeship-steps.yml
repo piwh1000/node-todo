@@ -1,3 +1,10 @@
-- name: node_todo
-  service: app
-  command: echo foo
+- service: awsdeployment
+  command: aws ecs register-task-definition --cli-input-json file:///deploy/tasks/backend.json
+- service: awsdeployment
+  command: aws ecs update-service --service my-backend-service --task-definition backend
+- service: awsdeployment
+  command: aws ecs register-task-definition --cli-input-json file:///deploy/tasks/process_queue.json
+- service: awsdeployment
+  command: aws ecs run-task --cluster default --task-definition process_queue --count 5
+- service: web
+  command: node server.js
