@@ -5,6 +5,5 @@ sudo: required
 services:
   - docker
 after_success:
-  script:
-    - bin/docker_push.sh
-    - bin/ecs_push.sh
+  script: ./bin/docker_push.sh
+  script: ./bin/ecs_push.sh
