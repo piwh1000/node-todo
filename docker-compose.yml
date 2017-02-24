@@ -1,2 +1,2 @@
 node-todo:
-  build: .
+  image: node:latest
